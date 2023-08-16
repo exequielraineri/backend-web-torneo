@@ -1,0 +1,74 @@
+
+
+
+
+
+
+
+*{
+  transition: .3s ease all;
+}
+
+
+
+
+.boton{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 150px;
+  background: lightgray;
+  color: black;
+  border: none;
+  cursor: pointer;
+  transition: .3s ease all;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.boton.dos::after{
+  content: "";
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  top:0;
+  left: -100%;
+
+  border-bottom: 150px solid black;
+  border-right: 150px solid transparent;
+  
+  transition: .4s ease-in-out all;
+}
+
+
+.boton.dos:hover::after{
+  left: 0;
+}
+
+.boton h4,div{
+  position: relative;
+  z-index: 2;
+  transition: .3s ease all;
+}
+
+.boton:hover{
+  color: lightblue;
+}
+
+.fondoImg{
+  margin: 0;
+  padding: 0;
+  background: url(../img/padel.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+
+
