@@ -46,4 +46,9 @@ public class JugadorService implements IJugadorService {
         return repo.obtenerPorDNI(dni);
     }
 
+    @Override
+    public List<Jugador> listarRanking() {
+        return repo.listarRanking();
+    }
+
 }

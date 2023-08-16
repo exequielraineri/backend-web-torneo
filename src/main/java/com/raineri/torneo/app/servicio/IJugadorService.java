@@ -21,4 +21,5 @@ public interface IJugadorService {
 
     public Optional<Jugador> obtenerPorDNI(String dni);
 
+    public List<Jugador> listarRanking();
 }

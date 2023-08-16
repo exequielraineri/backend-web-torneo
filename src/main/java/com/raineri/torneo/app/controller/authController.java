@@ -106,7 +106,7 @@ public class authController {
         if (jugadorExistente.isPresent()) {
             session.setAttribute("jugador", jugadorExistente.get());
             model.addAttribute("jugador", jugadorExistente.get());
-            return "perfil";
+            return "redirect:/perfil/".concat(jugadorExistente.get().getId().toString());
         } else {
             return "redirect:/acceder";
         }

@@ -5,6 +5,7 @@
 package com.raineri.torneo.app.repository;
 
 import com.raineri.torneo.app.model.Jugador;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -25,4 +26,6 @@ public interface IJugador extends JpaRepository<Jugador, Long>{
      @Query("SELECT j FROM Jugador j WHERE j.dni= :dni")
     public Optional<Jugador> obtenerPorDNI(String dni);
     
+    @Query("SELECT j FROM Jugador j ORDER BY j.puntos DESC")
+    public List<Jugador> listarRanking();
 }

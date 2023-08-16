@@ -19,4 +19,7 @@ public interface IPartidoServ {
     
     public Optional<Partido> obtener(Long id);
 
+    public List<Partido> listarPorTorneo(Long id_torneo);
+    
+    
 }

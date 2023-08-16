@@ -1,443 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Partidos</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,100;1,300;1,400&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a157f31727.js" crossorigin="anonymous"></script>
+        <title>Partidos</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,100;1,300;1,400&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/a157f31727.js" crossorigin="anonymous"></script>
 
-  <style>
-    body {
-      box-sizing: border-box;
-    }
+        <style>
+            body {
+                box-sizing: border-box;
+            }
 
-    .table td,
-    th {
-      text-align: center;
+            .table td,
+            th {
+                text-align: center;
 
-    }
+            }
 
-    .table .res {
-      background-color: lightblue;
-    }
+            .table .res {
+                background-color: lightblue;
+            }
 
-    .table .ranking {
-      background-color: orange;
-    }
+            .table .ranking {
+                background-color: orange;
+            }
 
-    .table .lineaSeparadora {
-      background-color: lightgray;
-    }
+            .table .lineaSeparadora {
+                background-color: lightgray;
+            }
 
-    a {
-      text-decoration: none;
-    }
-  </style>
+            a {
+                text-decoration: none;
+            }
+        </style>
 
-  <script src="js/funciones.js"></script>
+        <script src="js/funciones.js"></script>
 
-  <link rel="stylesheet" href="css/estilo.css">
-</head>
+        <link rel="stylesheet" href="css/estilo.css">
+    </head>
 
-<body class="bg-light">
-
-
-
-    <div th:include="plantilla/plantilla::menu"></div>
-
- 
-
-  <div class="container p-3 shadow">
-    <h1 style="display: flex; justify-content: space-between; align-items: end;">
-      <p style="display: flex; flex-direction: column; font-size: 1.5em;">
-        <span style="font-weight: 300; font-size: .8em;" th:text="${jugador.nombre}">Exequiel</span>
-        <span th:text="${jugador.apellido}">Raineri</span>
-      </p>
-      <p style="font-weight: 300;font-size: .6em; background-color: orange; border-radius: 5px; padding: 3px;" th:text="${jugador.categoria.nombre}" >6ta</p>
-    </h1>
-    <hr>
-    <h2>Estadísticas</h2>
-    <div style="display: grid; grid-template-columns: repeat(3,1fr);">
-
-
-      <p style="display: flex; flex-direction: column;font-weight: 300; " class="p-2">
-        Ranking
-        <span style="font-size: 1.2em; font-weight: normal;" th:text="${jugador.puesto}">1</span>
-      </p>
+    <body class="bg-light">
 
 
 
-      <p style="display: flex; flex-direction: column;font-weight: 300; " class="p-2">
-        Puntos
-        <span style="font-size: 1.2em; font-weight: normal;" th:text="${jugador.puntos}">1506</span>
-      </p>
+        <div th:include="plantilla/plantilla::menu"></div>
 
 
 
-      <p style="display: flex; flex-direction: column;font-weight: 300; " class="p-2">
-        Efectividad
-        <span style="font-size: 1.2em; font-weight: normal;">24%</span>
-      </p>
+        <div class="container p-3 shadow">
+            <h1 style="display: flex; justify-content: space-between; align-items: end;">
+                <p style="display: flex; flex-direction: column; font-size: 1.5em;">
+                    <span style="font-weight: 300; font-size: .8em;" th:text="${jugador.nombre}">Exequiel</span>
+                    <span th:text="${jugador.apellido}">Raineri</span>
+                </p>
+                <p style="font-weight: 300;font-size: .6em; background-color: orange; border-radius: 5px; padding: 3px;" th:text="${jugador.categoria.nombre}" >6ta</p>
+            </h1>
+            <hr>
+            <h2>Estadísticas</h2>
+            <div style="display: grid; grid-template-columns: repeat(3,1fr);">
+
+
+                <p style="display: flex; flex-direction: column;font-weight: 300; " class="p-2">
+                    Ranking
+                    <span style="font-size: 1.2em; font-weight: normal;" th:text="${jugador.puesto}">1</span>
+                </p>
 
 
 
-      <p style="display: flex; flex-direction: column;font-weight: 300; " class="p-2">
-        Ganados
-        <span style="font-size: 1.2em; font-weight: normal;">20</span>
-      </p>
+                <p style="display: flex; flex-direction: column;font-weight: 300; " class="p-2">
+                    Puntos
+                    <span style="font-size: 1.2em; font-weight: normal;" th:text="${jugador.puntos}">1506</span>
+                </p>
 
 
 
-      <p style="display: flex; flex-direction: column;font-weight: 300; " class="p-2">
-        Jugados
-        <span style="font-size: 1.2em; font-weight: normal;">30</span>
-      </p>
+                <p style="display: flex; flex-direction: column;font-weight: 300; " class="p-2">
+                    Efectividad
+                    <span style="font-size: 1.2em; font-weight: normal;" th:text="${efectividad}+'%'">24%</span>
+                </p>
 
 
 
-      <p style="display: flex; flex-direction: column;font-weight: 300; " class="p-2">
-        Perdidos
-        <span style="font-size: 1.2em; font-weight: normal;">10</span>
-      </p>
-
-    </div>
-    <hr>
-    <h4>Partidos</h4>
-    <div class="container" style="border-radius: 10px 10px 0 0; background-color: lightblue;">
-      <p class="text-dark" style="display: flex; justify-content: space-around; margin-bottom: 0;">
-        <span>
-          <a href="paginaTorneo.html" style="text-decoration: none;" class="text-dark">Torneo Relapago #2</a>
-        </span>
-        <span>20/08/23</span>
-      </p>
-    </div>
-    <div style="display: flex; flex-direction: column;">
-      <table class="table table-hover table-sm">
-        <thead class="table-dark">
-          <tr class="col" style="font-size: .7em;">
-            <th class="col-1">#</th>
-            <th class="col-3">Nombre</th>
-            <th class="col-1">Resultado</th>
-            <th class="col">1°</th>
-            <th class="col">2°</th>
-            <th class="col">3°</th>
-            <th class="col">4°</th>
-            <th class="col">5°</th>
-            <th class="col">Ranking</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="col" style="border-top: solid lightblue 2px;font-size: .9em;">
-            <td class="col-1">1</td>
-            <td class="col-3">
-              <a href="#">Exequiel Raineri</a>
-            </td>
-            <td class="col-1 res">3</td>
-            <td class="col">2</td>
-            <td class="col">3</td>
-            <td class="col">1</td>
-            <td class="col">2</td>
-            <td class="col">4</td>
-            <td class="col ranking">5530</td>
-          </tr>
-          <tr class="col" style="border-bottom: solid lightblue 2px;font-size: .9em;">
-            <td class="col-1">2</td>
-            <td class="col-3">
-              <a href="#">Santiago Raineri</a>
-            </td>
-            <td class="col-1 res">3</td>
-            <td class="col">2</td>
-            <td class="col">3</td>
-            <td class="col">1</td>
-            <td class="col">2</td>
-            <td class="col">4</td>
-            <td class="col ranking">5530</td>
-          </tr>
-
-          <tr class="col" style="border-top: solid lightblue 2px;font-size: .9em;">
-            <td class="col-1">1</td>
-            <td class="col-3">
-              <a href="#">Exequiel Raineri</a>
-            </td>
-            <td class="col-1 res">3</td>
-            <td class="col">2</td>
-            <td class="col">3</td>
-            <td class="col">1</td>
-            <td class="col">2</td>
-            <td class="col">4</td>
-            <td class="col ranking">5530</td>
-          </tr>
-          <tr class="col" style="border-bottom: solid lightblue 2px;font-size: .9em;">
-            <td class="col-1">2</td>
-            <td class="col-3">
-              <a href="#">Santiago Raineri</a>
-            </td>
-            <td class="col-1 res">3</td>
-            <td class="col">2</td>
-            <td class="col">3</td>
-            <td class="col">1</td>
-            <td class="col">2</td>
-            <td class="col">4</td>
-            <td class="col ranking">5530</td>
-          </tr>
-
-          <tr class="col" style="border-top: solid lightblue 2px;font-size: .9em;">
-            <td class="col-1">1</td>
-            <td class="col-3">
-              <a href="#">Exequiel Raineri</a>
-            </td>
-            <td class="col-1 res">3</td>
-            <td class="col">2</td>
-            <td class="col">3</td>
-            <td class="col">1</td>
-            <td class="col">2</td>
-            <td class="col">4</td>
-            <td class="col ranking">5530</td>
-          </tr>
-          <tr class="col" style="border-bottom: solid lightblue 2px;font-size: .9em;">
-            <td class="col-1">2</td>
-            <td class="col-3">
-              <a href="#">Santiago Raineri</a>
-            </td>
-            <td class="col-1 res">3</td>
-            <td class="col">2</td>
-            <td class="col">3</td>
-            <td class="col">1</td>
-            <td class="col">2</td>
-            <td class="col">4</td>
-            <td class="col ranking">5530</td>
-          </tr>
-
-          <tr class="col" style="border-top: solid lightblue 2px;font-size: .9em;">
-            <td class="col-1">1</td>
-            <td class="col-3">
-              <a href="#">Exequiel Raineri</a>
-            </td>
-            <td class="col-1 res">3</td>
-            <td class="col">2</td>
-            <td class="col">3</td>
-            <td class="col">1</td>
-            <td class="col">2</td>
-            <td class="col">4</td>
-            <td class="col ranking">5530</td>
-          </tr>
-          <tr class="col" style="border-bottom: solid lightblue 2px;font-size: .9em;">
-            <td class="col-1">2</td>
-            <td class="col-3">
-              <a href="#">Santiago Raineri</a>
-            </td>
-            <td class="col-1 res">3</td>
-            <td class="col">2</td>
-            <td class="col">3</td>
-            <td class="col">1</td>
-            <td class="col">2</td>
-            <td class="col">4</td>
-            <td class="col ranking">5530</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!--         -->
-    <div class="container" style="border-radius: 10px 10px 0 0; background-color: lightblue;">
-      <p class="text-dark" style="display: flex; justify-content: space-around; margin-bottom: 0;">
-        <span>
-          <a href="paginaTorneo.html" style="text-decoration: none;" class="text-dark">Torneo Relapago #2</a>
-        </span>
-        <span>20/08/23</span>
-      </p>
-    </div>
-    <div style="display: flex; flex-direction: column;">
-      <table class="table table-hover table-sm">
-        <thead class="table-dark">
-          <tr class="col" style="font-size: .7em;">
-            <th class="col-1">#</th>
-            <th class="col-3">Nombre</th>
-            <th class="col-1">Resultado</th>
-            <th class="col">1°</th>
-            <th class="col">2°</th>
-            <th class="col">3°</th>
-            <th class="col">4°</th>
-            <th class="col">5°</th>
-            <th class="col">Ranking</th>
-          </tr>
-        </thead>
-        <tbody>
-
-
-          <tr class="col" style="border-top: solid lightblue 2px;font-size: .9em;">
-            <td class="col-1">1</td>
-            <td class="col-3">
-              <a href="#">Exequiel Raineri</a>
-            </td>
-            <td class="col-1 res">3</td>
-            <td class="col">2</td>
-            <td class="col">3</td>
-            <td class="col">1</td>
-            <td class="col">2</td>
-            <td class="col">4</td>
-            <td class="col ranking">5530</td>
-          </tr>
-          <tr class="col" style="border-bottom: solid lightblue 2px;font-size: .9em;">
-            <td class="col-1">2</td>
-            <td class="col-3">
-              <a href="#">Santiago Raineri</a>
-            </td>
-            <td class="col-1 res">3</td>
-            <td class="col">2</td>
-            <td class="col">3</td>
-            <td class="col">1</td>
-            <td class="col">2</td>
-            <td class="col">4</td>
-            <td class="col ranking">5530</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!--         -->
-      <div class="container" style="border-radius: 10px 10px 0 0; background-color: lightblue;">
-        <p class="text-dark" style="display: flex; justify-content: space-around; margin-bottom: 0;">
-          <span>
-            <a href="paginaTorneo.html" style="text-decoration: none;" class="text-dark">Torneo Relapago #2</a>
-          </span>
-          <span>20/08/23</span>
-        </p>
-      </div>
-      <div style="display: flex; flex-direction: column;">
-        <table class="table table-hover table-sm">
-          <thead class="table-dark">
-            <tr class="col" style="font-size: .7em;">
-              <th class="col-1">#</th>
-              <th class="col-3">Nombre</th>
-              <th class="col-1">Resultado</th>
-              <th class="col">1°</th>
-              <th class="col">2°</th>
-              <th class="col">3°</th>
-              <th class="col">4°</th>
-              <th class="col">5°</th>
-              <th class="col">Ranking</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="col" style="border-top: solid lightblue 2px;font-size: .9em;">
-              <td class="col-1">1</td>
-              <td class="col-3">
-                <a href="#">Exequiel Raineri</a>
-              </td>
-              <td class="col-1 res">3</td>
-              <td class="col">2</td>
-              <td class="col">3</td>
-              <td class="col">1</td>
-              <td class="col">2</td>
-              <td class="col">4</td>
-              <td class="col ranking">5530</td>
-            </tr>
-            <tr class="col" style="border-bottom: solid lightblue 2px;font-size: .9em;">
-              <td class="col-1">2</td>
-              <td class="col-3">
-                <a href="#">Santiago Raineri</a>
-              </td>
-              <td class="col-1 res">3</td>
-              <td class="col">2</td>
-              <td class="col">3</td>
-              <td class="col">1</td>
-              <td class="col">2</td>
-              <td class="col">4</td>
-              <td class="col ranking">5530</td>
-            </tr>
-
-            <tr class="col" style="border-top: solid lightblue 2px;font-size: .9em;">
-              <td class="col-1">1</td>
-              <td class="col-3">
-                <a href="#">Exequiel Raineri</a>
-              </td>
-              <td class="col-1 res">3</td>
-              <td class="col">2</td>
-              <td class="col">3</td>
-              <td class="col">1</td>
-              <td class="col">2</td>
-              <td class="col">4</td>
-              <td class="col ranking">5530</td>
-            </tr>
-            <tr class="col" style="border-bottom: solid lightblue 2px;font-size: .9em;">
-              <td class="col-1">2</td>
-              <td class="col-3">
-                <a href="#">Santiago Raineri</a>
-              </td>
-              <td class="col-1 res">3</td>
-              <td class="col">2</td>
-              <td class="col">3</td>
-              <td class="col">1</td>
-              <td class="col">2</td>
-              <td class="col">4</td>
-              <td class="col ranking">5530</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <!--         -->
-        <div class="container" style="border-radius: 10px 10px 0 0; background-color: lightblue;">
-          <p class="text-dark" style="display: flex; justify-content: space-around; margin-bottom: 0;">
-            <span>
-              <a href="paginaTorneo.html" style="text-decoration: none;" class="text-dark">Torneo Relapago #2</a>
-            </span>
-            <span>20/08/23</span>
-          </p>
-        </div>
-        <div style="display: flex; flex-direction: column;">
-          <table class="table table-hover table-sm">
-            <thead class="table-dark">
-              <tr class="col" style="font-size: .7em;">
-                <th class="col-1">#</th>
-                <th class="col-3">Nombre</th>
-                <th class="col-1">Resultado</th>
-                <th class="col">1°</th>
-                <th class="col">2°</th>
-                <th class="col">3°</th>
-                <th class="col">4°</th>
-                <th class="col">5°</th>
-                <th class="col">Ranking</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="col" style="border-top: solid lightblue 2px;font-size: .9em;">
-                <td class="col-1">1</td>
-                <td class="col-3">
-                  <a href="#">Exequiel Raineri</a>
-                </td>
-                <td class="col-1 res">3</td>
-                <td class="col">2</td>
-                <td class="col">3</td>
-                <td class="col">1</td>
-                <td class="col">2</td>
-                <td class="col">4</td>
-                <td class="col ranking">5530</td>
-              </tr>
-              <tr class="col" style="border-bottom: solid lightblue 2px;font-size: .9em;">
-                <td class="col-1">2</td>
-                <td class="col-3">
-                  <a href="#">Santiago Raineri</a>
-                </td>
-                <td class="col-1 res">3</td>
-                <td class="col">2</td>
-                <td class="col">3</td>
-                <td class="col">1</td>
-                <td class="col">2</td>
-                <td class="col">4</td>
-                <td class="col ranking">5530</td>
-              </tr>
-            </tbody>
-          </table>
+                <p style="display: flex; flex-direction: column;font-weight: 300; " class="p-2">
+                    Ganados
+                    <span style="font-size: 1.2em; font-weight: normal;" th:text="${ganados}">20</span>
+                </p>
 
 
 
-</body>
+                <p style="display: flex; flex-direction: column;font-weight: 300; " class="p-2">
+                    Jugados
+                    <span style="font-size: 1.2em; font-weight: normal;" th:text="${jugados}">30</span>
+                </p>
+
+
+
+                <p style="display: flex; flex-direction: column;font-weight: 300; " class="p-2">
+                    Perdidos
+                    <span style="font-size: 1.2em; font-weight: normal;" th:text="${perdidos}">10</span>
+                </p>
+
+            </div>
+            <hr>
+            <h4>Partidos</h4>
+            <div  th:each="torneo : ${torneoParticipados}">
+
+
+                <div class="container" style="border-radius: 10px 10px 0 0; background-color: lightblue;">
+                    <p class="text-dark" style="display: flex; justify-content: space-around; margin-bottom: 0;">
+                        <span>
+                            <a th:href="@{/torneos/torneo/}+ ${torneo.id}" style="text-decoration: none;" class="text-dark" th:text="${torneo.nombre}" >Torneo Relapago #2</a>
+                        </span>
+                        <span th:text="${torneo.mostrarFecha}+' '+ ${torneo.mostrarHora}">20/08/23</span>
+                    </p>
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <table class="table table-hover table-sm">
+                        <thead class="table-dark">
+
+                            <tr class="col" style="font-size: .7em;">
+                                <th class="col-1">#</th>
+                                <th class="col-3">Equipo</th>
+                                <th class="col-1">Resultado</th>
+                                <th class="col">1°</th>
+                                <th class="col">2°</th>
+                                <th class="col">3°</th>
+                                <th class="col">4°</th>
+                                <th class="col">5°</th>
+                                <th class="col">Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody th:each="partido : ${torneo.partidos}">
+
+
+
+                            <tr class="col" style="border-top: solid lightblue 2px;" >
+                                <td class="col-1" rowspan="2" style="background-color: lightblue"></td>
+                                <td class="col-3">
+                                    <a th:href="@{/perfil/}+${partido.equipo_1.jugadores[0].id}" th:text="${partido.equipo_1.jugadores[0].nombre}+ ' '+${partido.equipo_1.jugadores[0].apellido}"></a>
+                                    <span>-</span>
+                                    <a th:href="@{/perfil/}+${partido.equipo_1.jugadores[1].id}" th:text="${partido.equipo_1.jugadores[1].nombre}+ ' '+${partido.equipo_1.jugadores[1].apellido}">Santiago Raineri</a>
+                                </td>
+                                <td class="col-1 res" th:text="${partido.res1}"></td>
+                                <td class="col" th:text="${partido.setPartido[0].res1}">-</td>
+                                <td class="col" th:text="${partido.setPartido[1].res1}">-</td>
+                                <td class="col" th:text="${partido.setPartido[2].res1}">-</td>
+                                <td class="col">-</td>
+                                <td class="col">-</td>
+                                <td class="col ranking" th:text="${partido.equipo_1.puntos}">5530</td>
+                            </tr>
+                            <tr class="col" style="border-bottom: solid lightblue 2px;">
+                                <td class="col-3">
+                                    <a th:href="@{/perfil/}+${partido.equipo_2.jugadores[0].id}" th:text="${partido.equipo_2.jugadores[0].nombre}+ ' '+${partido.equipo_2.jugadores[0].apellido}"></a>
+                                    <span>-</span>
+                                    <a th:href="@{/perfil/}+${partido.equipo_2.jugadores[1].id}" th:text="${partido.equipo_2.jugadores[1].nombre}+ ' '+${partido.equipo_2.jugadores[1].apellido}">Santiago Raineri</a>
+                                </td>
+                                <td class="col-1 res" th:text="${partido.res2}"></td>
+                                <td class="col" th:text="${partido.setPartido[0].res2}">-</td>
+                                <td class="col" th:text="${partido.setPartido[1].res2}">-</td>
+                                <td class="col" th:text="${partido.setPartido[2].res2}">-</td>
+                                <td class="col">-</td>
+                                <td class="col">-</td>
+                                <td class="col ranking" th:text="${partido.equipo_2.puntos}">5530</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+    </body>
 
 </html>

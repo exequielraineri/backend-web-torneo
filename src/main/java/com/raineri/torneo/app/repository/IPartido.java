@@ -5,7 +5,9 @@
 package com.raineri.torneo.app.repository;
 
 import com.raineri.torneo.app.model.Partido;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,5 +16,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface IPartido extends JpaRepository<Partido, Long>{
+    
+    @Query("SELECT p FROM Partido p WHERE p.torneo=:id_torneo")
+    public List<Partido> listarPartidosPorTorneo(Long id_torneo);
     
 }

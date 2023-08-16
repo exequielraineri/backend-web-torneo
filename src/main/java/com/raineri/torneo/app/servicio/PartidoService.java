@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @author ADMIN
  */
 @Service
-public class PartidoService implements IPartidoServ{
+public class PartidoService implements IPartidoServ {
 
     @Autowired
     private IPartido repo;
@@ -35,5 +35,10 @@ public class PartidoService implements IPartidoServ{
     public Partido guardar(Partido partido) {
         return repo.save(partido);
     }
-    
+
+    @Override
+    public List<Partido> listarPorTorneo(Long id_torneo) {
+        return repo.listarPartidosPorTorneo(id_torneo);
+    }
+
 }

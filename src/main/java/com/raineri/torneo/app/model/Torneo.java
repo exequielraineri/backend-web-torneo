@@ -53,6 +53,13 @@ public class Torneo{
     @JoinColumn(name = "torneo_id")
     private List<Inscripcion> inscripciones=new ArrayList<>();
     
+    
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "torneo_id")
+    private List<Partido> partidos=new ArrayList<>();
+    
+    
     public String mostrarFecha(){
         SimpleDateFormat sf=new SimpleDateFormat("dd-MM");
         return sf.format(fechaInicio);

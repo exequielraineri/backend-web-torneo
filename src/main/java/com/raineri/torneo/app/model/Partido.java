@@ -44,5 +44,10 @@ public class Partido {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "torneo_id")
     private Torneo torneo;
+   
+    
+    
+    
+    
     
 }
