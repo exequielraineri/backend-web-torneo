@@ -32,10 +32,10 @@ public class Jugador {
     private String apellido;
     @Column(name = "dni", unique = true, nullable = false)
     private Integer dni;
-    @Column(name = "puntos")
-    private Integer puntos;
-    @Column(name = "puesto")
-    private Integer puesto;
+    @Column(name = "puntos",columnDefinition = "int default 0")
+    private Integer puntos=0;
+    @Column(name = "puesto",columnDefinition = "int default 0")
+    private Integer puesto=0;
 
     @Column(name = "usuario", unique = true)
     private String usuario;

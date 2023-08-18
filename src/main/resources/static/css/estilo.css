@@ -48,7 +48,7 @@
   left: 0;
 }
 
-.boton h4,div{
+.boton h4,.bloque{
   position: relative;
   z-index: 2;
   transition: .3s ease all;

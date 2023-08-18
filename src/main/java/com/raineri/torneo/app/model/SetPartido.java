@@ -26,4 +26,7 @@ public class SetPartido {
     @Column(name = "res_2")
     private Integer res2;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "partido_id")
+    private Partido partido;
 }

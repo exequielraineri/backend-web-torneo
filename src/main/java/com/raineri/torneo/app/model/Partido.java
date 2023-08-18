@@ -37,17 +37,53 @@ public class Partido {
     @JoinColumn(name = "equipo_2")
     private Equipo equipo_2;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "partido_set", joinColumns = @JoinColumn(name = "partido_id"), inverseJoinColumns = @JoinColumn(name = "set_id"))
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "partido_id")
     private List<SetPartido> setPartido = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "torneo_id")
     private Torneo torneo;
-   
+
+    public int getJugados() {
+        int cont = 0;
+        for (SetPartido setP : setPartido) {
+            if (setP.getRes1() != null && setP.getRes2() != null) {
+                cont++;
+            }
+        }
+        return cont;
+    }
+
+    public boolean verificarAumentoSet() {
+        boolean puedeAgregarSet = true;
+        if (getJugados() >= 5) {
+            puedeAgregarSet = false;
+        }
+
+        res1 = res1 == null ? 0 : res1;
+        res2 = res2 == null ? 0 : res2;
+        if (res1 == 5 || res2 == 5) {
+            puedeAgregarSet = false;
+        }
+
+        if (getJugados() >= 3) {
+
+            if (res1 == (res2 + 2)) {
+                puedeAgregarSet = false;
+            }
+
+            if (res2 == (res1 + 2)) {
+                puedeAgregarSet = false;
+            }
+        }
+        return !puedeAgregarSet;
+
+    }
     
     
+ 
+
     
-    
-    
+
 }

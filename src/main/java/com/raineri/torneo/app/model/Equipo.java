@@ -25,10 +25,10 @@ public class Equipo {
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
-    @Column(name = "puntos")
-    private Integer puntos;
-    @Column(name = "puesto")
-    private Integer puesto;
+    @Column(name = "puntos", columnDefinition = "int default 0")
+    private Integer puntos=0;
+    @Column(name = "puesto",columnDefinition = "int default 0")
+    private Integer puesto=0;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "equipo_jugador", joinColumns = @JoinColumn(name = "equipo_id"), inverseJoinColumns = @JoinColumn(name = "jugador_id"))

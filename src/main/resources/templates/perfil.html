@@ -148,28 +148,59 @@
                                     <span>-</span>
                                     <a th:href="@{/perfil/}+${partido.equipo_1.jugadores[1].id}" th:text="${partido.equipo_1.jugadores[1].nombre}+ ' '+${partido.equipo_1.jugadores[1].apellido}">Santiago Raineri</a>
                                 </td>
-                                <td class="col-1 res" th:text="${partido.res1}"></td>
-                                <td class="col" th:text="${partido.setPartido[0].res1}">-</td>
-                                <td class="col" th:text="${partido.setPartido[1].res1}">-</td>
-                                <td class="col" th:text="${partido.setPartido[2].res1}">-</td>
-                                <td class="col">-</td>
-                                <td class="col">-</td>
-                                <td class="col ranking" th:text="${partido.equipo_1.puntos}">5530</td>
-                            </tr>
-                            <tr class="col" style="border-bottom: solid lightblue 2px;">
-                                <td class="col-3">
-                                    <a th:href="@{/perfil/}+${partido.equipo_2.jugadores[0].id}" th:text="${partido.equipo_2.jugadores[0].nombre}+ ' '+${partido.equipo_2.jugadores[0].apellido}"></a>
-                                    <span>-</span>
-                                    <a th:href="@{/perfil/}+${partido.equipo_2.jugadores[1].id}" th:text="${partido.equipo_2.jugadores[1].nombre}+ ' '+${partido.equipo_2.jugadores[1].apellido}">Santiago Raineri</a>
-                                </td>
-                                <td class="col-1 res" th:text="${partido.res2}"></td>
-                                <td class="col" th:text="${partido.setPartido[0].res2}">-</td>
-                                <td class="col" th:text="${partido.setPartido[1].res2}">-</td>
-                                <td class="col" th:text="${partido.setPartido[2].res2}">-</td>
-                                <td class="col">-</td>
-                                <td class="col">-</td>
-                                <td class="col ranking" th:text="${partido.equipo_2.puntos}">5530</td>
-                            </tr>
+                                <td class="col-1 res" th:if="${partido.res1 != null} "   th:text="${partido.res1}">-</td>
+                                <td class="col-1 res" th:if="${partido.res1 == null} ">-</td>
+
+                       
+
+
+                            <td class="col" th:if="${partido.setPartido[0].res1 != null} "   th:text="${partido.setPartido[0].res1}">-</td>
+                            <td class="col" th:if="${partido.setPartido[0].res1 == null} ">-</td>
+
+                            <td class="col" th:if="${partido.setPartido[1].res1 != null} "   th:text="${partido.setPartido[1].res1}">-</td>
+                            <td class="col" th:if="${partido.setPartido[1].res1 == null} ">-</td>
+
+                            <td class="col" th:if="${partido.setPartido[2].res1 != null} "   th:text="${partido.setPartido[2].res1}">-</td>
+                            <td class="col" th:if="${partido.setPartido[2].res1 == null} ">-</td>
+
+                            <td class="col" th:if="${partido.setPartido[3].res1 != null} "   th:text="${partido.setPartido[3].res1}">-</td>
+                            <td class="col" th:if="${partido.setPartido[3].res1 == null} ">-</td>
+
+                            <td class="col" th:if="${partido.setPartido[4].res1 != null} "   th:text="${partido.setPartido[4].res1}">-</td>
+                            <td class="col" th:if="${partido.setPartido[4].res1 == null} ">-</td>
+                            <td class="col ranking" th:text="${partido.equipo_1.puntos}">5530</td>
+
+                        
+
+
+
+
+
+                        </tr>
+                        <tr class="col" style="border-bottom: solid lightblue 2px;">
+                            <td class="col-3">
+                                <a th:href="@{/perfil/}+${partido.equipo_2.jugadores[0].id}" th:text="${partido.equipo_2.jugadores[0].nombre}+ ' '+${partido.equipo_2.jugadores[0].apellido}"></a>
+                                <span>-</span>
+                                <a th:href="@{/perfil/}+${partido.equipo_2.jugadores[1].id}" th:text="${partido.equipo_2.jugadores[1].nombre}+ ' '+${partido.equipo_2.jugadores[1].apellido}">Santiago Raineri</a>
+                            </td>
+                            <td class="col-1 res" th:if="${partido.res2 != null} "   th:text="${partido.res2}">-</td>
+                            <td class="col-1 res" th:if="${partido.res2 == null} ">-</td>
+                            <td class="col" th:if="${partido.setPartido[0].res2 != null} "   th:text="${partido.setPartido[0].res2}">-</td>
+                            <td class="col" th:if="${partido.setPartido[0].res2 == null} ">-</td>
+
+                            <td class="col" th:if="${partido.setPartido[1].res2 != null} "   th:text="${partido.setPartido[1].res2}">-</td>
+                            <td class="col" th:if="${partido.setPartido[1].res2 == null} ">-</td>
+
+                            <td class="col" th:if="${partido.setPartido[2].res2 != null} "   th:text="${partido.setPartido[2].res2}">-</td>
+                            <td class="col" th:if="${partido.setPartido[2].res2 == null} ">-</td>
+
+                            <td class="col" th:if="${partido.setPartido[3].res2 != null} "   th:text="${partido.setPartido[3].res2}">-</td>
+                            <td class="col" th:if="${partido.setPartido[3].res2 == null} ">-</td>
+
+                            <td class="col" th:if="${partido.setPartido[4].res2 != null} "   th:text="${partido.setPartido[4].res2}">-</td>
+                            <td class="col" th:if="${partido.setPartido[4].res2 == null} ">-</td>
+                            <td class="col ranking" th:text="${partido.equipo_2.puntos}">5530</td>
+                        </tr>
 
                         </tbody>
                     </table>

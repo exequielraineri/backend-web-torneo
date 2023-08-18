@@ -74,12 +74,15 @@ public class perfilController {
                     if (!existeEnTorneosParticipados(p.getTorneo())) {
                         torneosParticipados.add(p.getTorneo());
                     }
-                    if (p.getRes1() > p.getRes2()) {
-                        ganados++;
-                    } else {
-                        perdidos++;
+                    if (p.getRes1() != null && p.getRes2() != null) {
+                        if (p.getRes1() > p.getRes2().intValue()) {
+                            ganados++;
+                        } else {
+                            perdidos++;
+                        }
+                        jugados++;
                     }
-                    jugados++;
+
                 }
             }
 
@@ -88,21 +91,22 @@ public class perfilController {
                     if (!existeEnTorneosParticipados(p.getTorneo())) {
                         torneosParticipados.add(p.getTorneo());
                     }
-                    if (p.getRes2() > p.getRes1()) {
-                        ganados++;
-                    } else {
-                        perdidos++;
+                    if (p.getRes1() != null && p.getRes2() != null) {
+                        if (p.getRes2() > p.getRes1()) {
+                            ganados++;
+                        } else {
+                            perdidos++;
+                        }
+                        jugados++;
                     }
-                    jugados++;
                 }
             }
 
         }
 
         //Efectividad = (Partidos Ganados / Partidos Jugados) * 100
-        efectividad = (ganados/jugados)*100;
+        efectividad = (ganados / jugados) * 100;
 
-        
         System.out.println(String.format("ganados %.2f div perdidos %.2f resultado %.2f%%", ganados.floatValue(), jugados.floatValue(), efectividad.floatValue()));
         System.out.println("fectividad: " + efectividad.floatValue());
 

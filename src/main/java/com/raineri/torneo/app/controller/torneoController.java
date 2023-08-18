@@ -24,6 +24,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -89,7 +90,7 @@ public class torneoController {
         model.addAttribute("partidosHidden", partidosHidden);
         partidos = obtenerPartidos(torneo);
         model.addAttribute("partidos", partidos);
-
+        model.addAttribute("setPartido", new SetPartido());
         return "paginaTorneo";
     }
 
@@ -133,14 +134,6 @@ public class torneoController {
         return jugadoresInscriptos;
     }
 
-    /*private boolean existeYa(Jugador jug) {
-        for (Jugador ji : jugadoresInscriptos) {
-            if (ji.getId() == jug.getId()) {
-                return true;
-            }
-        }
-        return false;
-    }*/
     @PostMapping("inscribir/{id}")
     public String inscribir(@PathVariable Long id, @RequestParam(name = "dni_1") String dni_1, @RequestParam(name = "dni_2") String dni_2) {
         Torneo torneo = torneoService.obtener(id).get();
@@ -148,7 +141,7 @@ public class torneoController {
         Optional<Jugador> j1 = jugadorService.obtenerPorDNI(dni_1);
         Optional<Jugador> j2 = jugadorService.obtenerPorDNI(dni_2);
 
-        StringBuilder msj_ins = new StringBuilder();
+        StringBuilder msj_ins = new StringBuilder("\n\n");
 
         if (j1.isPresent() && j2.isPresent()) {
             //correcto
@@ -181,11 +174,11 @@ public class torneoController {
 
         } else {
             if (!j1.isPresent()) {
-                msj_ins.append(String.format("El jugador con DNI %s no esta registrado!\n", dni_1));
+                msj_ins.append(String.format("\nEl jugador con DNI %s no esta registrado!", dni_1));
             }
 
             if (!j2.isPresent()) {
-                msj_ins.append(String.format("El jugador con DNI %s no esta registrado!", dni_2));
+                msj_ins.append(String.format("\nEl jugador con DNI %s no esta registrado!", dni_2));
             }
 
         }
@@ -195,12 +188,10 @@ public class torneoController {
     }
 
     private Equipo existeEquipo(Jugador jugador_1, Jugador jugador_2) {
-        boolean existe = false;
         Equipo equipo = null;
         List<Equipo> equipos = equipoService.listar();
         for (Equipo e : equipos) {
             if ((e.getJugadores()[0].getId() == jugador_1.getId() && e.getJugadores()[1].getId() == jugador_2.getId()) || (e.getJugadores()[0].getId() == jugador_2.getId() && e.getJugadores()[1].getId() == jugador_1.getId())) {
-                existe = true;
                 equipo = e;
                 break;
             }
@@ -215,7 +206,6 @@ public class torneoController {
         for (Inscripcion ins : torneo.getInscripciones()) {
             for (Jugador jug : ins.getEquipo().getJugadores()) {
                 if (jug.getId() == jugador_1.getId() || jug.getId() == jugador_2.getId()) {
-                    System.out.println("Exist");
                     existe = true;
                     break;
                 }
@@ -226,78 +216,46 @@ public class torneoController {
     }
 
     private boolean verificarFechaParaMostrarPartidos() {
-        SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
         Date fechaActual = new Date();
         if (fechaActual.before(torneo.getFechaInicio())) {
-            System.out.println("--------------------------------------------------\n\n");
-            System.out.println(String.format("%s es after que %s --> %b", sf.format(fechaActual), sf.format(torneo.getFechaInicio()), fechaActual.after(torneo.getFechaInicio())));
             return true;
         }
         return false;
 
     }
 
-    @PostMapping("/guardarPartido")
-    public String guardarPartido(@RequestParam(name = "equipo_1") String equipo_1_id, @RequestParam(name = "equipo_2") String equipo_2_id, @RequestParam(name = "res_1") String res_1, @RequestParam(name = "res_2") String res_2, @RequestParam(name = "set_1_1") String set_1_1, @RequestParam(name = "set_2_1") String set_2_1, @RequestParam(name = "set_1_2") String set_1_2, @RequestParam(name = "set_2_2") String set_2_2, @RequestParam(name = "set_1_3") String set_1_3, @RequestParam(name = "set_2_3") String set_2_3) {
+    @PostMapping("/crearPartido")
+    public String guardarPartido(@RequestParam(name = "equipo_1") String equipo_1_id, @RequestParam(name = "equipo_2") String equipo_2_id) {
 
-        Partido partido = new Partido();
         Equipo equipo1 = equipoService.obtener(Long.parseLong(equipo_1_id)).get();
         Equipo equipo2 = equipoService.obtener(Long.parseLong(equipo_2_id)).get();
 
-        partido.setEquipo_1(equipo1);
-        partido.setEquipo_2(equipo2);
+        if (equipo1.getId() != equipo2.getId()) {
 
-        partido.setRes1(Integer.parseInt(res_1));
-        partido.setRes2(Integer.parseInt(res_2));
+            Partido partido = new Partido();
+            partido.setEquipo_1(equipo1);
+            partido.setEquipo_2(equipo2);
 
-        SetPartido set_1 = new SetPartido();
-        SetPartido set_2 = new SetPartido();
-        SetPartido set_3 = new SetPartido();
+            List<SetPartido> setPartido = new ArrayList<>();
+            SetPartido set;
+            for (int i = 0; i < 5; i++) {
+                set = new SetPartido();
+                set = SetService.guardar(set);
+                setPartido.add(set);
+                System.out.println("Size->" + setPartido.size());
+            }
 
-        set_1.setRes1(Integer.parseInt(set_1_1));
-        set_2.setRes1(Integer.parseInt(set_1_2));
-        set_3.setRes1(Integer.parseInt(set_1_3));
+            partido.setSetPartido(setPartido);
+            torneo = torneoService.obtener(torneo.getId()).get();
+            partido.setTorneo(torneo);
 
-        set_1.setRes2(Integer.parseInt(set_2_1));
-        set_2.setRes2(Integer.parseInt(set_2_2));
-        set_3.setRes2(Integer.parseInt(set_2_3));
-
-        set_1 = SetService.guardar(set_1);
-        set_2 = SetService.guardar(set_2);
-        set_3 = SetService.guardar(set_3);
-
-        List<SetPartido> setPartido = new ArrayList<>();
-        setPartido.add(set_1);
-        setPartido.add(set_2);
-        setPartido.add(set_3);
-
-        partido.setSetPartido(setPartido);
-        torneo = torneoService.obtener(torneo.getId()).get();
-        partido.setTorneo(torneo);
-
-        if (partido.getRes1() > partido.getRes2()) {
-            partido.getEquipo_1().setPuntos(partido.getEquipo_1().getPuntos().intValue() + 3);
-
-            partido.getEquipo_1().getJugadores()[0].setPuntos(partido.getEquipo_1().getJugadores()[0].getPuntos().intValue() + 3);
-            partido.getEquipo_1().getJugadores()[1].setPuntos(partido.getEquipo_1().getJugadores()[1].getPuntos().intValue() + 3);
-            jugadorService.guardar(partido.getEquipo_1().getJugadores()[0]);
-            jugadorService.guardar(partido.getEquipo_1().getJugadores()[1]);
-            equipoService.guardar(partido.getEquipo_1());
+            partido = partidoService.guardar(partido);
 
         } else {
-            partido.getEquipo_2().setPuntos(partido.getEquipo_2().getPuntos().intValue() + 3);
-            
-            partido.getEquipo_2().getJugadores()[0].setPuntos(partido.getEquipo_2().getJugadores()[0].getPuntos().intValue() + 3);
-            partido.getEquipo_2().getJugadores()[1].setPuntos(partido.getEquipo_2().getJugadores()[1].getPuntos().intValue() + 3);
-            jugadorService.guardar(partido.getEquipo_2().getJugadores()[0]);
-            jugadorService.guardar(partido.getEquipo_2().getJugadores()[1]);
-            equipoService.guardar(partido.getEquipo_2());
+            System.out.println("\n\nNo puede");
         }
 
-        partido = partidoService.guardar(partido);
-
         return "redirect:/torneos/";
-
     }
 
     private List<Partido> obtenerPartidos(Torneo t) {
@@ -311,6 +269,59 @@ public class torneoController {
         }
 
         return aux;
+    }
+
+    @PostMapping("/agregarSet/{id_partido}")
+    public String agregarSet(@ModelAttribute(name = "setPartido") SetPartido set, @PathVariable(name = "id_partido") Long id_partido) {
+        System.out.println("Equipo 1->" + set.getRes1().intValue());
+        System.out.println("Equipo 2->" + set.getRes2().intValue());
+        int res1 = set.getRes1().intValue();
+        int res2 = set.getRes2().intValue();
+
+        Partido partido = partidoService.obtener(id_partido).get();
+        
+        
+        for (SetPartido setPartido : partido.getSetPartido()) {
+            if (setPartido.getRes1() == null || setPartido.getRes2() == null) {
+                set = setPartido;
+                break;
+            }
+        }
+        if (set.getId() != null) {
+
+            if (res1 != res2) {
+                set.setRes1(res1);
+                set.setRes2(res2);
+                set = SetService.guardar(set);
+                System.out.println(String.format("%d -> res1: %d res2: %d", set.getId().intValue(),res1,res2));
+                partido.getSetPartido().add(set);
+               
+                
+                if (res1 > res2) {
+                    //gana equipo 1
+                    partido.getEquipo_1().setPuntos(partido.getEquipo_1().getPuntos() + 3);
+                    partido.getEquipo_1().getJugadores()[0].setPuntos(partido.getEquipo_1().getJugadores()[0].getPuntos() + 3);
+                    partido.getEquipo_1().getJugadores()[1].setPuntos(partido.getEquipo_1().getJugadores()[1].getPuntos() + 3);
+
+                    partido.setRes1((partido.getRes1() == null ? 0 : partido.getRes1()) + 1);
+                } else {
+                    //gana equipo 2
+                    partido.getEquipo_2().setPuntos(partido.getEquipo_2().getPuntos() + 3);
+                    partido.getEquipo_2().getJugadores()[0].setPuntos(partido.getEquipo_2().getJugadores()[0].getPuntos() + 3);
+                    partido.getEquipo_2().getJugadores()[1].setPuntos(partido.getEquipo_2().getJugadores()[1].getPuntos() + 3);
+                    partido.setRes2((partido.getRes2() == null ? 0 : partido.getRes2()) + 1);
+                }
+
+                partido = partidoService.guardar(partido);
+            } else {
+                System.out.println("no se puede mismo resultado");
+            }
+        } else {
+            System.out.println("Ya no hay set");
+        }
+        partidos = obtenerPartidos(torneo);
+        
+        return "redirect:/torneos/torneo/" + torneo.getId();
     }
 
 }
